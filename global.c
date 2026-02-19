@@ -1,7 +1,7 @@
 /*
 Global Server Integration
 Author: Grish
-Version: 1.486global
+Version: 1.487global
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

@@ -3,11 +3,11 @@
 //defines
 #define MAX_USERS 2048 //reduced from 4096 to save memory
 #define MAX_HIGHSCORES 15
-#define CTF_VERSION_S		"1.486global" // fix auto idle passing votes...
+#define CTF_VERSION_S		"1.487global" // increase max maps
 #define		HOOK_READY	0
 #define		HOOK_OUT	1
 #define		HOOK_ON		2
-#define MAX_MAPS           8192
+#define MAX_MAPS           8192 // 1.487global
 #define MAX_MAPNAME_LEN    32 
 #define MAX_MANUAL           32 
 #define MAX_MANUAL_LEN    128 
