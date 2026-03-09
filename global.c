@@ -1092,7 +1092,7 @@ void Print_Remote_Maptimes(edict_t *ent, char *server)
 	rows_printed++;
 	if (localfound)
 	{
-		Com_sprintf(this_name, sizeof(this_name), level_items.stored_item_times[0].owner);
+		Com_sprintf(this_name, sizeof(this_name), "%s", level_items.stored_item_times[0].owner);
 		// if (maplist.times[level.mapnum][0].time == sorted_remote_map_best_times[0].time) // wr time
 		if (level_items.stored_item_times[0].time == sorted_remote_map_best_times[0].time)
 		{
@@ -1255,7 +1255,7 @@ void Display_Global_Scoreboard()
 		sprintf(colorstring, "string");
 		if (sorted_remote_map_best_times[i].time > 0.0001)
 		{
-			Com_sprintf(this_name, sizeof(this_name), sorted_remote_map_best_times[i].name);
+			Com_sprintf(this_name, sizeof(this_name), "%s", sorted_remote_map_best_times[i].name);
 			Highlight_Name(this_name);
 
 			if (i < gset_vars->global_replay_max)
@@ -1354,7 +1354,7 @@ void Display_Dual_Scoreboards()
 		sprintf(gblcolorstring, "string");
 		if (sorted_remote_map_best_times[gbli].time > 0.0001)
 		{
-			Com_sprintf(gblthis_name, sizeof(gblthis_name), sorted_remote_map_best_times[gbli].name);
+			Com_sprintf(gblthis_name, sizeof(gblthis_name), "%s", sorted_remote_map_best_times[gbli].name);
 			Highlight_Name(gblthis_name);
 
 			if (gbli < gset_vars->global_replay_max)

@@ -2033,7 +2033,7 @@ def:
 					time = maplist.times[mapnum][0].time - maplist.times[mapnum][i].time;
 				else
 					time = maplist.times[mapnum][i].time;				
-			  Com_sprintf(name,sizeof(name),maplist.users[maplist.times[mapnum][i].uid].name);
+			  Com_sprintf(name,sizeof(name), "%s", maplist.users[maplist.times[mapnum][i].uid].name);
 			  Highlight_Name(name);
               gi.cprintf (ent, PRINT_HIGH, "%-3d %-18s   %s  %8.3f %9.3f\n",i+1,name,maplist.times[mapnum][i].date,time,maplist.times[mapnum][i].time);
 			}
@@ -2078,7 +2078,7 @@ void ShowPlayerTimes(edict_t *ent)
 	  temp = maplist.sorted_users[i].uid;
 	  if (temp>=0)
 	  {
-		  Com_sprintf(name,sizeof(name),maplist.users[temp].name);
+		  Com_sprintf(name,sizeof(name), "%s", maplist.users[temp].name);
 		  Com_sprintf(txt,sizeof(txt),"%-3d %-16s %3d %3d %3d %3d %3d %3d %3d %3d %3d  %3d  %3d  %3d  %3d  %3d  %3d %5d", i+1, name,maplist.users[temp].points[0],maplist.users[temp].points[1],maplist.users[temp].points[2],maplist.users[temp].points[3],
 			  maplist.users[temp].points[4],maplist.users[temp].points[5],maplist.users[temp].points[6],maplist.users[temp].points[7],maplist.users[temp].points[8],maplist.users[temp].points[9],maplist.users[temp].points[10],maplist.users[temp].points[11],maplist.users[temp].points[12],maplist.users[temp].points[13],maplist.users[temp].points[14],maplist.users[temp].score);
 ///		  Highlight_Name(name);
@@ -2120,7 +2120,7 @@ void ShowPlayerScores(edict_t *ent)
 	  temp = maplist.sorted_israfel[i].uid;
 	  if (temp>=0)
 	  {
-		  Com_sprintf(name,sizeof(name),maplist.users[temp].name);
+		  Com_sprintf(name,sizeof(name), "%s", maplist.users[temp].name);
 		  //Highlight_Name(name);
 		  Com_sprintf(txt,sizeof(txt),"%-3d %-16s %3d %3d %3d %3d %3d %3d %3d %3d %3d  %3d  %3d  %3d  %3d  %3d  %3d %4.1f%%", i+1, name,maplist.users[temp].points[0],maplist.users[temp].points[1],maplist.users[temp].points[2],maplist.users[temp].points[3],
 			  maplist.users[temp].points[4],maplist.users[temp].points[5],maplist.users[temp].points[6],maplist.users[temp].points[7],maplist.users[temp].points[8],maplist.users[temp].points[9],maplist.users[temp].points[10],maplist.users[temp].points[11],maplist.users[temp].points[12],maplist.users[temp].points[13],maplist.users[temp].points[14],
@@ -2160,7 +2160,7 @@ void ShowPlayerMaps(edict_t *ent)
 	  temp = maplist.sorted_completions[i].uid;
 	  if (temp>=0)
 	  {
-		  Com_sprintf(name,sizeof(name),maplist.users[temp].name);
+		  Com_sprintf(name,sizeof(name), "%s", maplist.users[temp].name);
 //		  Highlight_Name(name);
 		Com_sprintf(txt,sizeof(txt),"%-3d %-16s   %4d  %3.1f", i+1, name,maplist.users[temp].completions,(float)maplist.users[temp].completions / (float)maplist.nummaps * 100);
 		  if (Can_highlight_Name(name))
@@ -2892,7 +2892,7 @@ void list_admins(edict_t *ent)
 		   gi.cprintf (ent, PRINT_HIGH, "%-3d %-16s\n", i+1, va("ACCESS DENIED"));
 		   continue;
 	   }
-	  Com_sprintf(name,sizeof(name),admin_pass[i].name);
+	  Com_sprintf(name,sizeof(name), "%s", admin_pass[i].name);
 	  Highlight_Name(name);
       gi.cprintf (ent, PRINT_HIGH, "%-3d %-16s %-16s %-1d \n", i+1, name,admin_pass[i].password,admin_pass[i].level);
 	  //num++;
@@ -11762,7 +11762,7 @@ void list_mapsleft(edict_t *ent)
 				{
 				   if (maplist.times[i2][0].uid>=0)
 				   {
-					  Com_sprintf(name,sizeof(name),maplist.users[maplist.times[i2][0].uid].name);
+					  Com_sprintf(name,sizeof(name), "%s", maplist.users[maplist.times[i2][0].uid].name);
 					  Highlight_Name(name);
   					  gi.cprintf (ent, PRINT_HIGH, "%-3d %5s %-20s %-16s %8.3f\n", i+1,map_skill[maplist.skill[i2]],
 						  maplist.mapnames[i2],name,
@@ -11833,7 +11833,7 @@ void list_mapsdone(edict_t *ent)
 				{
 				   if (maplist.times[i2][0].uid>=0)
 				   {
-					  Com_sprintf(name,sizeof(name),maplist.users[maplist.times[i2][0].uid].name);
+					  Com_sprintf(name,sizeof(name), "%s", maplist.users[maplist.times[i2][0].uid].name);
 					  Highlight_Name(name);
   					  gi.cprintf (ent, PRINT_HIGH, "%-3d %5s %-20s %-16s %8.3f\n", i+1,map_skill[maplist.skill[i2]],
 						  maplist.mapnames[i2],name,
@@ -13403,7 +13403,7 @@ void Lastseen_Command(edict_t *ent)
 	  temp = maplist.sorted_completions[i].uid;
 	  if (temp>=0)
 	  {
-		  Com_sprintf(name,sizeof(name),maplist.users[temp].name);
+		  Com_sprintf(name,sizeof(name), "%s", maplist.users[temp].name);
 		if (maplist.users[temp].lastseen)
 		{
 			diff = timenow - maplist.users[temp].lastseen;
@@ -13572,7 +13572,7 @@ void ShowCurrentVotelist(edict_t *ent,int offset)
 	   mapnum = votemaplist[i];
 	   if (maplist.times[mapnum][0].uid>=0)
 	   {
-		  Com_sprintf(name,sizeof(name),maplist.users[maplist.times[mapnum][0].uid].name);
+		  Com_sprintf(name,sizeof(name), "%s", maplist.users[maplist.times[mapnum][0].uid].name);
 		  Highlight_Name(name);
   		  gi.cprintf (ent, PRINT_HIGH, "%-3d %5s %-20s %5d times\n", i+1, map_skill[maplist.skill[mapnum]],maplist.mapnames[mapnum],maplist.update[mapnum]);
 	   }
@@ -14269,8 +14269,8 @@ void Changename(edict_t *ent)
 		gi.cprintf(ent,PRINT_HIGH,"format: changename orig_name new_name\nWarning: Any name change will force the current map to be reloaded.\n");
 		return;
 	}
-	Com_sprintf(origname,sizeof(origname),gi.argv(1));
-	Com_sprintf(newname,sizeof(newname),gi.argv(2));
+	Com_sprintf(origname,sizeof(origname), "%s", gi.argv(1));
+	Com_sprintf(newname,sizeof(newname), "%s", gi.argv(2));
 	origid = GetPlayerUid_NoAdd(origname);
 	newid = GetPlayerUid_NoAdd(newname);
 	if (origid<0)
