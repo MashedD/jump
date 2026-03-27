@@ -1389,3 +1389,7 @@ void Display_Dual_Scoreboards()
 	gi.WriteByte(svc_layout);
 	gi.WriteString(string);
 }
+
+int ESF_debug = false;
+html_data_t html_data;
+

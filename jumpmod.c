@@ -14440,6 +14440,7 @@ int	curtime;
 #ifdef _WIN32
 int Sys_Milliseconds (void)
 {
+/*
 	static int		base;
 	static qboolean	initialized = false;
 
@@ -14454,6 +14455,15 @@ int Sys_Milliseconds (void)
 	curtime = timeGetTime() - base;
 
 	return curtime;
+*/
+    static LARGE_INTEGER freq = {0}, start = {0};
+    if (freq.QuadPart == 0) {
+        QueryPerformanceFrequency(&freq);
+        QueryPerformanceCounter(&start);
+    }
+    LARGE_INTEGER now;
+    QueryPerformanceCounter(&now);
+    return (int)(((now.QuadPart - start.QuadPart) * 1000) / freq.QuadPart);
 }
 #else
 int Sys_Milliseconds (void)

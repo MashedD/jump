@@ -261,7 +261,9 @@ float Q_fabs (float f)
 #endif
 }
 
-#if defined _M_IX86 && !defined C_ONLY
+#if defined(WIN32)
+#define Q_ftol(f) ((int)(f))
+#elif defined _M_IX86 && !defined C_ONLY
 #pragma warning (disable:4035)
 __declspec( naked ) long Q_ftol( float f )
 {
@@ -345,7 +347,7 @@ BoxOnPlaneSide
 Returns 1, 2, or 1 + 2
 ==================
 */
-#if !id386 || defined __linux__
+#if !id386 || defined __linux__ || defined WIN32
 int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, struct cplane_s *p)
 {
 	float	dist1, dist2;

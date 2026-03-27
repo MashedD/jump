@@ -1,9 +1,41 @@
 # Quake2 Jump Makefile
 
-# Compiler flags
-CC = gcc
-CFLAGS = -std=gnu17 -w -fPIC -Dstricmp=strcasecmp -Wno-unused-result -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-pointer-to-int-cast
-LDFLAGS = -fPIC -ldl -lm -shared -lcurl
+# Complier flags
+CC     = x86_64-w64-mingw32-gcc
+LD     = x86_64-w64-mingw32-gcc
+CFLAGS = -std=gnu17 -w -fPIC -Dstricmp=strcasecmp \
+		 -Wno-unused-result \
+		 -Wno-implicit-function-declaration \
+		 -Wno-incompatible-pointer-types \
+		 -Wno-pointer-to-int-cast \
+		 -DHAVE_CURL -DCURL_STATICLIB
+LDFLAGS = -shared -static-libgcc -Wl,--gc-sections -L/usr/x86_64-w64-mingw32/lib
+
+# curl and its deps (only ones we know exist)
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libcurl.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libnghttp2.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libpsl.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libidn2.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libbrotlidec.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libbrotlicommon.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libzstd.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libunistring.a
+
+# ssh2 (needs zlib)
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libssh2.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libz.a
+
+# OpenSSL (ssl first, then crypto)
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libssl.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libcrypto.a
+
+# windows / misc helpers
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libcrypt32.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libws2_32.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libwldap32.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libiconv.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libbcrypt.a
+LDFLAGS += /usr/x86_64-w64-mingw32/lib/libwinpthread.a
 
 # Project files
 GAME_OBJS = \
@@ -16,7 +48,7 @@ GAME_OBJS = \
 
 # Shared library name
 ARCH = $(shell uname -m | sed -e s/i.86/i386/ -e s/amd64/x86_64/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/ -e s/alpha/axp/)
-SHARED_LIB = game$(ARCH).so
+SHARED_LIB = game$(ARCH).dll
 
 # Debug build settings
 DEBUG_DIR = debug

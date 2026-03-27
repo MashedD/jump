@@ -1360,7 +1360,7 @@ struct edict_s
 
 };
 
-int ESF_debug;
+extern int ESF_debug;
 
 //ZOID
 #include "g_ctf.h"
