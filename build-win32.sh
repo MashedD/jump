@@ -2,4 +2,5 @@
 set -Eeuo pipefail
 
 make -f makefile.win32 -j$(nproc)
+chmod -x release/gamex86.dll
 
